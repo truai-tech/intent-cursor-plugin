@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "intent-mcp-server": {
+      "url": "https://api.onintent.build/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${env:INTENT_API_TOKEN}"
+      }
+    }
+  }
+}

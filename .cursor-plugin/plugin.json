@@ -1,0 +1,13 @@
+{
+  "name": "intent",
+  "displayName": "Intent",
+  "version": "0.1.0",
+  "description": "Cursor plugin for Intent — changeset workflows, project context, and MCP integration.",
+  "author": {
+    "name": "truai.tech"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/truai-tech/intent-cursor-plugin",
+  "keywords": ["cursor", "plugin", "intent", "changeset", "mcp"],
+  "logo": "assets/logo.svg"
+}

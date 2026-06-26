@@ -1,0 +1,49 @@
+---
+description: Intent workflow overview — when to use MCP vs local files, and which skill to run
+alwaysApply: true
+---
+
+# Intent workflow
+
+Pick up work from Intent changesets rather than ad-hoc tasks.
+
+Shared changeset patterns (resolve ID, match repos, checkout branches, read `.intent/`) live in the **intent-changeset** rule.
+
+## Local git vs MCP
+
+| Need | Prefer |
+| --- | --- |
+| Changeset + specs on checked-out intent branch | Local `.intent/` files (see intent-changeset rule) — read only |
+| Changeset metadata, todos, comments (read) | `get_changeset` |
+| List or filter changesets | `list_changesets` |
+| Specs when not on branch | `list_artifacts` → `get_artifact` |
+| Update specs or changeset description | Ask the user, then `refine_changeset` — never edit `.intent/` locally |
+| Update status or todos | Ask the user, then `update_changeset` (todos are full replacement) |
+| Post a comment | Ask the user, then `add_comment` |
+| List PRs for a changeset | `list_pull_requests` |
+| AI readiness check before closing | `preflight_check` |
+| Link a repo to a changeset | Ask the user, then `link_repository` |
+| Read a specific source file | Local workspace search/read (Grep, Read, glob). Use `read_file` only when the file is not in the workspace |
+| Natural-language codebase question | `explore` (or local search if repos are checked out) |
+| Resolve `projectId` | `list_projects` |
+| Map repo IDs to names/URLs | `list_repositories` (requires `projectId`; filter by `repositoryIds` from `get_changeset`) |
+
+When files are available locally, prefer local search and read over MCP. Use MCP for remote context, metadata, and questions across the indexed codebase.
+
+## Skills
+
+| Task | Skill |
+| --- | --- |
+| Pick up a changeset, checkout branches, outline implementation | **start-changeset** |
+| Verify implementation against acceptance criteria and specs | **verify-changeset** |
+| Quick changeset summary: todos, PRs, local workspace | **status-changeset** |
+| Sync changeset/specs from local code | **refine-from-code** |
+
+## Commands
+
+| Command | Task |
+| --- | --- |
+| `/intent-start` | Pick up a changeset — follows **start-changeset** |
+| `/intent-verify` | Verify implementation — follows **verify-changeset** |
+| `/intent-status` | Quick changeset summary — follows **status-changeset** |
+| `/intent-refine` | Update specs from code — follows **refine-from-code** |
