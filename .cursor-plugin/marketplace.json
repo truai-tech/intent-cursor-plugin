@@ -1,0 +1,17 @@
+{
+  "name": "intent",
+  "owner": {
+    "name": "truai.tech"
+  },
+  "metadata": {
+    "description": "Cursor plugin for Intent — changeset workflows, project context, and MCP integration.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "intent",
+      "source": ".",
+      "description": "Pick up changesets, verify against specs, and refine requirements from code."
+    }
+  ]
+}

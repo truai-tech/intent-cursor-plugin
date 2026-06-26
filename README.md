@@ -59,7 +59,7 @@ Intent UI  →  changeset + specs  →  .intent/ in repo  →  Cursor agent
    export INTENT_API_TOKEN="your-token-here"
    ```
 
-   Create a token in Intent settings.
+   In the Intent app, open **Settings** and create an API token from the token dialog (there is no separate URL — the dialog is the entry point).
 
 3. Open **Cursor Settings → Customize** and enable the Intent plugin.
 4. Confirm the **intent-mcp-server** MCP server is enabled in Customize.
@@ -240,26 +240,33 @@ Set in your shell profile or environment before starting Cursor.
 
 ## Local development
 
-Test the plugin before publishing:
+Test the plugin before publishing. Either method works:
 
-1. Symlink or copy the plugin into Cursor's local plugins directory:
+**Option A — import from folder** (requires the marketplace manifest):
 
-   ```bash
-   ln -s /path/to/intent-cursor-plugin ~/.cursor/plugins/local/intent
-   ```
-
-2. Restart Cursor or run **Developer: Reload Window**.
-3. Enable the plugin and MCP server in **Customize**.
+1. In Cursor, open **Customize** and add plugins from this repository folder.
+2. Cursor looks for `.cursor-plugin/marketplace.json` at the repo root — that file lists the plugin and points to `plugin.json`.
+3. Enable the plugin and **intent-mcp-server** MCP server in Customize.
 4. Invoke commands with `/` in Agent chat.
+
+**Option B — symlink into local plugins:**
+
+```bash
+ln -s /path/to/intent-cursor-plugin ~/.cursor/plugins/local/intent
+```
+
+Then restart Cursor or run **Developer: Reload Window**, enable the plugin and MCP server in Customize, and test commands.
 
 ### Repository layout
 
 ```text
 intent-cursor-plugin/
 ├── .cursor-plugin/
+│   ├── marketplace.json   # Marketplace manifest (required for folder import)
 │   └── plugin.json        # Plugin manifest (required)
 ├── assets/
 │   └── logo.svg
+├── CHANGELOG.md
 ├── mcp.json               # Intent MCP server configuration
 ├── commands/              # Slash commands
 ├── rules/                 # Cursor rules (.mdc)
@@ -268,6 +275,12 @@ intent-cursor-plugin/
 ```
 
 Components in `rules/`, `skills/`, `commands/`, and `mcp.json` are auto-discovered. See the [Cursor plugin docs](https://cursor.com/docs/plugins) for manifest fields and submission.
+
+---
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
