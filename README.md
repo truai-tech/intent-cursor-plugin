@@ -206,7 +206,7 @@ Each command delegates to a skill:
 | `start-changeset` | `/intent-start` | Pick up work, checkout, outline |
 | `status-changeset` | `/intent-status` | Quick dashboard |
 | `verify-changeset` | `/intent-verify` | Completeness audit |
-| `refine-from-code` | `/intent-refine` | Sync spec from code |
+| `refine-changeset` | `/intent-refine` | Sync spec from code |
 
 ---
 

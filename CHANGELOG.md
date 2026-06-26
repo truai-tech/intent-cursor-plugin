@@ -9,4 +9,4 @@ Initial release.
 - MCP integration with the Intent API (`intent-mcp-server`)
 - Slash commands: `/intent-start`, `/intent-status`, `/intent-verify`, `/intent-refine`
 - Always-on rules for changeset workflow and branch conventions
-- Skills for start, status, verify, and refine workflows
+- Skills for start, status, verify, and refine changeset workflows

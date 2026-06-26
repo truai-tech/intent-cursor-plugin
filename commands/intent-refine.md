@@ -7,7 +7,7 @@ description: Update the changeset and linked specs to match local code via refin
 
 Align the changeset and linked specs with what was actually built locally.
 
-Follow the **refine-from-code** skill exactly. Apply shared patterns from the **intent-changeset** rule.
+Follow the **refine-changeset** skill exactly. Apply shared patterns from the **intent-changeset** rule.
 
 ## Resolve changeset
 

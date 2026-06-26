@@ -1,5 +1,5 @@
 ---
-name: refine-from-code
+name: refine-changeset
 description: >-
   Update an Intent changeset and linked specs to match what was actually built
   in code. Gathers local diffs, compares against requirements, drafts a
@@ -10,7 +10,7 @@ description: >-
   verify-changeset (/intent-verify) first.
 ---
 
-# Refine From Code
+# Refine Changeset
 
 Align the changeset and linked specs with local implementation. **Never edit `.intent/` files locally** — use `refine_changeset` after the user confirms the draft message.
 

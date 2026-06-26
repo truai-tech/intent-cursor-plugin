@@ -37,7 +37,7 @@ When files are available locally, prefer local search and read over MCP. Use MCP
 | Pick up a changeset, checkout branches, outline implementation | **start-changeset** |
 | Verify implementation against acceptance criteria and specs | **verify-changeset** |
 | Quick changeset summary: todos, PRs, local workspace | **status-changeset** |
-| Sync changeset/specs from local code | **refine-from-code** |
+| Sync changeset/specs from local code | **refine-changeset** |
 
 ## Commands
 
@@ -46,4 +46,4 @@ When files are available locally, prefer local search and read over MCP. Use MCP
 | `/intent-start` | Pick up a changeset — follows **start-changeset** |
 | `/intent-verify` | Verify implementation — follows **verify-changeset** |
 | `/intent-status` | Quick changeset summary — follows **status-changeset** |
-| `/intent-refine` | Update specs from code — follows **refine-from-code** |
+| `/intent-refine` | Update specs from code — follows **refine-changeset** |

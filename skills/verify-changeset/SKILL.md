@@ -5,7 +5,7 @@ description: >-
   the changeset, linked specs, and acceptance criteria. Use when the user asks
   to verify, review completeness, check if work is done, validate a changeset,
   or prepare to close or merge a changeset. Also use on intent branches before
-  marking a changeset complete. For spec-side gaps, use refine-from-code
+  marking a changeset complete. For spec-side gaps, use refine-changeset
   (/intent-refine) — not this skill.
 ---
 
@@ -79,7 +79,7 @@ Present a structured summary:
 4. **Gaps** — missing repos, unchecked todos, missing tests, spec items marked Not Included that appear implemented (scope creep) or Included that are absent
 5. **Suggested next steps** — ordered list of what to fix before closing the changeset
 
-For each gap, ask the user whether to **fix in code** or **update the spec/changeset**. For spec-side updates, point to **refine-from-code** (`/intent-refine`) — do not call `refine_changeset` from verify. A gap may mean incomplete implementation or outdated requirements.
+For each gap, ask the user whether to **fix in code** or **update the spec/changeset**. For spec-side updates, point to **refine-changeset** (`/intent-refine`) — do not call `refine_changeset` from verify. A gap may mean incomplete implementation or outdated requirements.
 
 | Gap status | Likely next step |
 | --- | --- |
