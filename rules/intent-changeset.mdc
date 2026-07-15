@@ -29,25 +29,43 @@ Only operate on repos that are both linked to the changeset and present locally.
 
 ## Branch checkout
 
-For each matched local repo, find and check out the intent branch:
+For each matched local repo, check out the **existing remote** intent branch. **Never create a new local branch.**
+
+1. `git fetch origin`
+2. List remotes and find the branch: `git branch -r | grep "origin/intent/<first-8-chars-of-changesetId>"`
+3. If no matching remote branch exists, skip this repo — do not invent or create a branch locally.
+4. Check out **tracking the remote** (replace with the actual branch name from step 2):
 
 ```bash
-git fetch origin
-git branch -r | grep "intent/<first-8-chars-of-changesetId>"
-git checkout <branch>
-git pull
+git switch --track origin/intent/<full-branch-name>
+# or: git checkout --track origin/intent/<full-branch-name>
+git pull --ff-only
 ```
 
-Skip repos with no matching branch.
+5. Verify upstream is set: `git rev-parse --abbrev-ref '@{upstream}'` should show `origin/intent/...`.
+
+**Do not:**
+- Run `git checkout -b intent/...` — that creates a local-only branch with no upstream
+- Run `git checkout intent/...` without confirming the remote branch exists
+- Guess the branch slug from the changeset title — always list remotes first
+
+If already on the correct intent branch with upstream set, `git pull --ff-only` is enough.
+
+Skip repos with no matching remote branch.
 
 ## Reading `.intent/` locally
 
 All repos carry the same `.intent/` content. Read from **one repo only** — typically the first matched local repo with a checked-out intent branch.
 
-1. **Changeset first** — `.intent/changesets/<first-8-chars>*` (Summary, Acceptance Criteria, Testing Notes, spec links)
-2. **Linked specs** — follow relative links in the changeset's `## Specs` section (e.g. `../specs/f7154808.md`). Do not read unlinked specs.
+When `.intent/` files exist locally, **always read changesets and specs from disk first**. MCP is for metadata that is not synced into the repo (todos, comments, status, PR links) — not for spec body text or acceptance criteria when local files are available.
 
-Prefer local `.intent/` files over MCP when on an intent branch — **read only**.
+1. **Changeset first (local)** — `.intent/changesets/<first-8-chars>*` for Summary, Acceptance Criteria, Testing Notes, and spec links
+2. **Linked specs (local)** — follow relative links in the changeset's `## Specs` section (e.g. `../specs/f7154808.md`). Do not read unlinked specs.
+3. **MCP only when needed** — call `get_changeset` for todos (checked state), status, and comments. Do **not** use `get_artifact` or `list_artifacts` for specs already linked in the local changeset file and present under `.intent/specs/`.
+
+If not on an intent branch or `.intent/` is missing locally, use MCP (`get_changeset`, `list_artifacts`, `get_artifact`) as fallback.
+
+Prefer local `.intent/` files over MCP whenever they exist — **read only**.
 
 ## Do not edit `.intent/` files
 

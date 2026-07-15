@@ -18,11 +18,13 @@ Use the first available source from the **intent-changeset** rule: user-provided
 
 ### Step 2: Fetch remote state
 
-Call MCP:
+Call MCP for data **not** in local `.intent/` files:
 
 - `get_changeset` — title, status, type, todos (checked state), comment count or latest comment snippet
 - `list_pull_requests` — PR title, state, and URL per linked repo
 - `list_repositories` — resolve linked repo names/URLs from `repositoryIds`
+
+Do **not** use MCP for acceptance criteria or spec text when `.intent/` exists locally (see Step 3).
 
 ### Step 3: Check local workspace
 
@@ -37,7 +39,7 @@ git rev-list --left-right --count origin/<default-branch>...HEAD
 
 Note repos linked to the changeset but missing locally. Skip repos not in the workspace.
 
-If on an intent branch in a matched repo, read `.intent/changesets/<prefix>*` and note the file's modification time as a sync hint (Intent syncs from the server ~every 5 minutes).
+If on an intent branch in a matched repo, **read** `.intent/changesets/<prefix>*` locally for the changeset summary and spec links — do not fetch the same content from MCP. Note the file's modification time as a sync hint (Intent syncs from the server ~every 5 minutes).
 
 ### Step 4: Report
 

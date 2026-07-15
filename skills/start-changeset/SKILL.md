@@ -39,7 +39,7 @@ If the user did not already provide a changeset ID, present changesets using Ask
 
 ### Step 4: Get changeset details and match repos
 
-Call `get_changeset` with the selected `changesetId`. Extract todos, acceptance criteria, and comments.
+Call `get_changeset` with the selected `changesetId` for **metadata only**: linked `repositoryIds`, todos, status, and comments. Do not use the MCP response for acceptance criteria or spec text if local `.intent/` files will be available after checkout.
 
 Match linked repos to the workspace per the **intent-changeset** rule (repo discovery).
 
@@ -47,9 +47,16 @@ Match linked repos to the workspace per the **intent-changeset** rule (repo disc
 
 Check out intent branches in matched local repos per the **intent-changeset** rule (branch checkout).
 
+**Critical:** track the **remote** branch (`git switch --track origin/intent/...`). Never run `git checkout -b`. If no remote intent branch exists for a repo, skip it and report that — do not create a local branch.
+
 ### Step 6: Read changeset and specs
 
-Read the changeset and linked specs per the **intent-changeset** rule (reading `.intent/` locally). Use the first repo where Step 5 succeeded.
+**Read from local `.intent/` files** in the first repo where Step 5 succeeded. Use the Read/Grep tools on:
+
+- `.intent/changesets/<first-8-chars>*` — requirements, acceptance criteria, testing notes
+- Linked files under `.intent/specs/` from the changeset's `## Specs` section
+
+Only fall back to MCP (`get_artifact`, `list_artifacts`) if `.intent/` is missing or you are not on an intent branch. Merge in todo/status/comment data from Step 4's `get_changeset` call.
 
 ### Step 7: Outline implementation
 

@@ -26,9 +26,9 @@ Resolve the changeset ID and match linked repos to the workspace per the **inten
 
 ### Step 2: Load current requirements
 
-**From MCP** — call `get_changeset` for title, status, todos, and comments.
+**Local `.intent/` first** — when on an intent branch and `.intent/` exists, read the changeset and linked specs from disk per the **intent-changeset** rule. Note acceptance criteria, testing notes, Included/Not Included, and open todos from local files.
 
-**From local `.intent/`** — read the changeset and linked specs per the **intent-changeset** rule. Note acceptance criteria, testing notes, Included/Not Included, and open todos.
+**MCP second** — call `get_changeset` only for title, status, todos (checked state), and comments. Do **not** fetch spec body text via `get_artifact` or `list_artifacts` when those specs exist under `.intent/specs/`.
 
 ### Step 3: Collect local changes
 

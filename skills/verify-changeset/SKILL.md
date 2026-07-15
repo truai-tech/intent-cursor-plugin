@@ -21,15 +21,13 @@ Resolve the changeset ID and match linked repos to the workspace per the **inten
 
 ### Step 2: Load requirements
 
-**From MCP** — call `get_changeset` for todos (including checked state), status, and comments.
+**Local `.intent/` first** — when on an intent branch and `.intent/` exists, read the changeset and linked specs from disk per the **intent-changeset** rule. Build the verification checklist from local files:
 
-**From local `.intent/`** — read the changeset and linked specs per the **intent-changeset** rule.
-
-Build a verification checklist from:
 - Each acceptance criterion (bullet)
 - Each testing note (bullet)
 - Relevant spec sections (Included/Not Included, How It Works, acceptance-style requirements)
-- Unchecked todos from `get_changeset`
+
+**MCP second** — call `get_changeset` only for todos (checked state), status, and comments. Add unchecked todos to the checklist. Do **not** fetch spec content via `get_artifact` or `list_artifacts` when those specs are already linked locally under `.intent/specs/`.
 
 ### Step 3: Collect local changes
 

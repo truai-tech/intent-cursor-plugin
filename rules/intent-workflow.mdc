@@ -13,8 +13,8 @@ Shared changeset patterns (resolve ID, match repos, checkout branches, read `.in
 
 | Need | Prefer |
 | --- | --- |
-| Changeset + specs on checked-out intent branch | Local `.intent/` files (see intent-changeset rule) — read only |
-| Changeset metadata, todos, comments (read) | `get_changeset` |
+| Changeset + specs on checked-out intent branch | Local `.intent/` files — **always read these first**; never use MCP for spec body text when local files exist |
+| Changeset metadata, todos, comments (read) | `get_changeset` — todos, status, comments only when local `.intent/` is available |
 | List or filter changesets | `list_changesets` |
 | Specs when not on branch | `list_artifacts` → `get_artifact` |
 | Update specs or changeset description | Ask the user, then `refine_changeset` — never edit `.intent/` locally |
